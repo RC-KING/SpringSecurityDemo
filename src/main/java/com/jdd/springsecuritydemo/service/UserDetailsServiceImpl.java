@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
+    // PasswordEncoder是密码加密解密的工具类
     @Autowired
     private PasswordEncoder pw;
 
@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // 2.把查询出来的密码(注册的时候已经被加密过的)进行解析,放入构造参数
         String password = pw.encode("123");
         return new User(username,password,
+                // 授权工具类
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
     }
 }
