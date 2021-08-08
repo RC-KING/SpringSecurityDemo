@@ -45,6 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.html").permitAll()
                 // 错误页面放行
                 .antMatchers("/error.html").permitAll()
+                // 表示放行js,css,images下的所有目录(常用!!!!)
+                .antMatchers("/js/**","/css/**","/images/**").permitAll()
+                // 放行图片资源(所有目录下的以.xxx结尾的都被放行)(不常用)
+                .antMatchers("/**/*.png","/**/*.jpg").permitAll()
+                // 正则表达式匹配规则
+                .regexMatchers(".+[.]png").permitAll()
+                .mvcMatchers("/demo").servletPath("/xxxx").permitAll()
                 // 所有请求,都需要授权认证,必须登录之后才能被访问
                 .anyRequest().authenticated();
 
